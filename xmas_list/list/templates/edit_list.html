@@ -1,0 +1,30 @@
+{% extends 'base_template.html' %}
+
+
+{% block content %}
+	<h1>Add item</h1>	
+
+	<hr style="border-color:green">
+	<form action="/edit_list" method="post"> 
+	    {% csrf_token %}
+	    {{form.as_p}}
+	    <input type="submit" value="Add" />
+	</form>
+	<hr style="border-color:red"> 
+
+	<h2>{{context.username}}'s List</h2>
+	<hr style="border-color:green">
+
+	    {% for g in context.gifts_requested %}
+	    <hr>
+			
+		<h4>{{g.description}}</h4>
+
+		{% if g.gift_link is not None %}
+		<a href="{{g.gift_link}}">{{g.gift_link}}</a> 
+		<br>
+		{% endif %}
+		<a class="btn btn-danger" href="delete_gift/{{g.id}}">Delete Item</a>
+
+	    {% endfor %}
+{% endblock %}

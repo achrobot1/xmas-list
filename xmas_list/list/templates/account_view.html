@@ -1,0 +1,32 @@
+{% extends 'base_template.html' %}
+
+{% block content %}
+    <h3>Hello {{ user_profile.user.username }}</h3>
+    {% if user_profile.image.url is not None %}
+    <img src="{{ user_profile.image.url }}" alt="" />
+    {% endif %}
+
+    <hr style="border-color:green">
+
+    {% if success %}
+	<h2 style="color:green">Password Successfully Changed!</h2>
+    {% elif fail %}
+	<h2 style="color:red">Failed to change password</h2>
+    {% else %}
+    {% endif %}
+
+
+    <form action="update_account_info" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }} 
+    <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+
+    <hr style="border-color:red">
+
+    <form action="change_password" method="post">
+    {% csrf_token %}
+    {{ pass_form.as_p }} 
+    <button class="btn btn-primary" type="submit">Change Password</button>
+    </form>
+{% endblock %}

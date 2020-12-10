@@ -1,0 +1,65 @@
+{% extends 'base_template.html' %}
+
+
+
+	    
+{% block title %}
+    <div class="row justify-content-center"> 
+    <div class="col-12 col-xl-9 " align="center">
+	<h1 style="font-family:'Lobster', 'cursive'; color: #782218"><u>
+	Chrobot Christmas Lists
+	</u></h1>
+    </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    	
+    <h2 align="center" class="pb-3">Hello {{user.username}}</h2>
+
+    {% for c in context %}
+
+	
+	<h3>
+	    <i class="fa fa-gift" style="color:green"></i>
+	    {{c.users.username}}
+	</h3>
+	<hr style="border-color:green">
+
+	{% for g in c.gifts_requested %}
+
+	    {% if user == c.users %} 
+	    <h4>{{g.description}}</h4>
+		{% if g.gift_link is not None %}
+		<a href="{{g.gift_link}}">{{g.gift_link}}</a> 
+		{% endif %} 
+
+	    {% else %}
+		{% if g.gift_claimed %}
+		<h4 style="color:gray">{{g.description}}</h4>
+		    {% if g.gift_claimed_by == user %}
+		    <a href="unclaim_gift/{{g.id}}">Unclaim Gift</a>
+		    {% else %}
+		    <h5>Gift has been claimed</h5>
+		    {% endif %}
+		{% else %}
+		    <h4>{{g.description}}</h4>
+		    {% if g.gift_link is not None %}
+		    <a href="{{g.gift_link}}">{{g.gift_link}}</a>
+		    <br>
+		    {% endif %} 
+		    <a class="btn btn-danger" href="claim_gift/{{g.id}}">Claim this Gift</a>
+		{% endif %}
+	    {% endif %}
+
+	    <hr>
+
+	{% endfor %}
+	<hr style="border-color:red">
+
+    {% endfor %}
+{% endblock %}
+
+    </div><!-- End columns -->
+    </div><!-- End row -->
+

@@ -1,0 +1,21 @@
+
+body {
+    background: white;
+    color: black;
+    background-image: url('wrapping-paper.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.red-border {
+    border-style: solid;
+    border-color: red;
+}
+
+.white-bg {
+    background-color: white;
+}
+
+.gift-claim-link {
+    color: red;
+}
